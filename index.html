@@ -6,7 +6,6 @@
 <title>Personal Gallery</title>
 
 <style>
-
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -22,7 +21,6 @@ body{
 }
 
 /* section */
-
 .section{
     margin-bottom:50px;
 }
@@ -35,6 +33,170 @@ body{
     max-width:650px;
     margin-bottom:15px;
 }
+
+/* horizontal gallery */
+.gallery{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    scroll-behavior:smooth;
+}
+
+/* hide scrollbar aesthetic */
+.gallery::-webkit-scrollbar{
+    height:6px;
+}
+
+.gallery::-webkit-scrollbar-thumb{
+    background:#8bbf8b;
+    border-radius:10px;
+}
+
+/* photo card */
+.photo{
+    min-width:160px;
+    width:160px;
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+    flex-shrink:0;
+    cursor:pointer;
+}
+
+.photo img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+}
+
+.caption{
+    font-size:13px;
+    padding:6px 8px;
+    text-align:center;
+}
+
+/* lightbox overlay */
+#lightbox{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:1000;
+}
+
+#lightbox img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:8px;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+    transition:0.3s;
+}
+
+#lightbox .caption{
+    color:white;
+    font-size:16px;
+    margin-top:10px;
+    text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- PERSONAL -->
+<div class="section">
+<h2>Me</h2>
+<p>Random photos from my everyday life and personal experiences.</p>
+<div class="gallery">
+    <div class="photo"><img src="img/2.jpeg" alt=""><div class="caption">Coffee break</div></div>
+    <div class="photo"><img src="img/3.jpeg" alt=""><div class="caption">Weekend trip</div></div>
+    <div class="photo"><img src="img/4.webp" alt=""><div class="caption">Quiet afternoon</div></div>
+    <div class="photo"><img src="img/5.webp" alt=""><div class="caption">Late night thoughts</div></div>
+    <div class="photo"><img src="img/6.png" alt=""><div class="caption">Simple moment</div></div>
+</div>
+</div>
+
+<!-- MY CAT -->
+<div class="section">
+<h2>Summer</h2>
+<p>summer’s daily mood.</p>
+<div class="gallery">
+    <div class="photo"><img src="img/somer1.jpeg" alt="look up"><div class="caption">look up</div></div>
+    <div class="photo"><img src="img/somer2.jpeg" alt="eepy"><div class="caption">eepy</div></div>
+    <div class="photo"><img src="img/somer3.jpeg" alt="pussyfat"><div class="caption">pussyfat</div></div>
+    <div class="photo"><img src="img/somer5.png" alt="gymnast"><div class="caption">ima gymnast</div></div>
+    <div class="photo"><img src="img/somer6.jpg" alt="muehehe"><div class="caption">muehehe</div></div>
+</div>
+</div>
+
+<!-- NATURE / OJT -->
+<div class="section">
+<h2>OJT</h2>
+<div class="gallery">
+    <div class="photo"><img src="img/arlly and company_021420.png" alt="w/ te france"><div class="caption">w/ te france</div></div>
+    <div class="photo"><img src="img/received_1254181320002963.jpeg" alt="zumba"><div class="caption">zumba</div></div>
+    <div class="photo"><img src="img/received_2266339270441549.jpeg" alt="CSPC_USANT_UNEP"><div class="caption">CSPC_USANT_UNEP</div></div>
+    <div class="photo"><img src="img/received_1451694529962564.jpeg" alt="bday surprise"><div class="caption">bday surprise whajsjaj</div></div>
+    <div class="photo"><img src="img/received_933605419188994.jpeg" alt="panggap"><div class="caption">panggap</div></div>
+    <div class="photo"><img src="img/received_1351843976702570.jpeg" alt=""><div class="caption"></div></div>
+</div>
+</div>
+
+<!-- RANDOM -->
+<div class="section">
+<h2>Random Moments</h2>
+<p>Photos that capture unexpected or simple everyday moments.</p>
+<div class="gallery">
+    <div class="photo"><img src="https://picsum.photos/300?17" alt="Street corner"><div class="caption">Street corner</div></div>
+    <div class="photo"><img src="https://picsum.photos/300?18" alt="Night lights"><div class="caption">Night lights</div></div>
+    <div class="photo"><img src="https://picsum.photos/300?19" alt="Old building"><div class="caption">Old building</div></div>
+    <div class="photo"><img src="https://picsum.photos/300?20" alt="Unexpected view"><div class="caption">Unexpected view</div></div>
+    <div class="photo"><img src="https://picsum.photos/300?21" alt="City moment"><div class="caption">City moment</div></div>
+</div>
+</div>
+
+</div>
+
+<!-- Lightbox overlay -->
+<div id="lightbox">
+    <img src="" alt="">
+    <div class="caption"></div>
+</div>
+
+<script>
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lbImg = lightbox.querySelector('img');
+const lbCaption = lightbox.querySelector('.caption');
+
+document.querySelectorAll('.photo img').forEach(img => {
+    img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lbImg.src = img.src;
+        lbCaption.textContent = img.alt || img.nextElementSibling.textContent;
+    });
+});
+
+lightbox.addEventListener('click', e => {
+    if(e.target !== lbImg){
+        lightbox.style.display = 'none';
+    }
+});
+</script>
+
+</body>
+</html>}
 
 /* horizontal gallery */
 
